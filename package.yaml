@@ -1,0 +1,37 @@
+name:                circleci-demo-haskell
+version:             0.1.0.0
+github:              "githubuser/circleci-demo-haskell"
+license:             BSD3
+extra-source-files:
+- README.md
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  circleci-demo-haskell-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - circleci-demo-haskell
+    - scotty
+
+tests:
+  circleci-demo-haskell-test:
+    main:                LibTests.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - circleci-demo-haskell
+    - tasty
+    - tasty-hunit
