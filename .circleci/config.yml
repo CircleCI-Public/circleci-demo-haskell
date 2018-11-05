@@ -8,16 +8,10 @@ jobs:
       - restore_cache:
           name: Restore Cached Dependencies
           keys:
-            - cci-demo-haskell-v2-{{ checksum "package.yaml" }}
-      - run:
-          name: "Look for the dependency folders. 1"
-          command: ls -la
+            - cci-demo-haskell-v1-{{ checksum "package.yaml" }}
       - run:
           name: Resolve/Update Dependencies
           command: stack setup
-      - run:
-          name: "Look for the dependency folders. 2"
-          command: ls -la
       - run:
           name: Run tests
           command: stack test
@@ -26,12 +20,9 @@ jobs:
           command: stack install
       - save_cache:
           name: Cache Dependencies
-          key: cci-demo-haskell-v2-{{ checksum "stack.yaml" }}
+          key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}
           paths:
             - ".stack-work"
-      - run:
-          name: "Look for the dependency folders. 3"
-          command: ls -la
       - store_artifacts: # upload build artifact for display in CircleCi
           path: ~/.local/bin/circleci-demo-haskell-exe
           destination: circleci-demo-haskell-exe
