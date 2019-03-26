@@ -18,6 +18,9 @@ jobs:
       - run:
           name: Install executable
           command: stack install
+      - run:
+          name: current directory
+          command: echo "# check for stack?" ; ls -la; echo "# show .stack-work"; ls -la .stack-work; echo "# show root/"; ls -la /root; echo "# show root stack"; ls -la /root/.stack
       - save_cache:
           name: Cache Dependencies
           key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}
